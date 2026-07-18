@@ -1,35 +1,22 @@
-const secondHand = document.querySelector(".second-hand");
-const mintHand = document.querySelector(".min-hand");
-const hourHand = document.querySelector (".hour-hand");
+const hourHand = document.querySelector('.hour-hand');
+const minHand = document.querySelector('.min-hand');
+const secondHand = document.querySelector('.second-hand');
 
+function setTime() {
+    const now = new Date();
+    
+    const seconds = now.getSeconds();
+    const secondsDegrees = (seconds / 60) * 360;
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
 
-function setDate (){
-  const now = new Date();
+    const mins = now.getMinutes();
+    const minsDegrees = (mins / 60) * 360 + (seconds / 60) * 6;
+    minHand.style.transform = `rotate(${minsDegrees}deg)`;
 
-  const second = now.getSeconds();
-  const secondDegrees = ((second / 60 ) * 360 + 90 );
-  secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+    const hours = now.getHours();
+    const hoursDegrees = (hours / 12) * 360 + (mins / 60) * 30;
+    hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+}
 
-
-
-  const min = now.getMinutes();
-  const minDegrees = ((min /60 ) * 360 + 90 );
-  mintHand.style.transform = ` rotate(${minDegrees}deg)`;
-
-
-
-
-  const hour = now.getHours();
-  const hourDegrees = (hour / 12 ) * 360 + ((min / 60 ) * 30 + 90 );
-  hourHand.style.transform = ` rotate(${hourDegrees}deg)`;
-
-
-
-};
-  setInterval(setDate , 1000);
-
-// setInterval(
-//   ()=>(time.innerText = new Date().
-//   toLocaleTimeString("en-us",
-//     {hour12:true})),1000
-// );
+setInterval(setTime, 1000);
+setTime();
